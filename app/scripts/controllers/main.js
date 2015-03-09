@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the testApp
  */
-angular.module('testApp')
+angular.module('recipeBookApp')
   .controller('MainCtrl', ['$scope', 'ParseService', function ($scope, ParseService) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
