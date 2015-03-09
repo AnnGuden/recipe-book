@@ -34,7 +34,7 @@ module.exports = function (grunt) {
           yuicompress: true
         },
         files: {
-          "app/styles/result.css": "app/styles/style.less"
+          "app/styles/style.css": "app/less/style.less"
         }
       }
     },
@@ -57,7 +57,7 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['app/styles/{,*/}*.less'],
+        files: ['app/less/{,*/}*.less'],
         tasks: ['less']
       },
       gruntfile: {
@@ -441,13 +441,14 @@ module.exports = function (grunt) {
     'autoprefixer',
     'concat',
     'ngAnnotate',
-    'copy:dist',
+    //'copy:dist',
     'cdnify',
     'cssmin',
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'less'
   ]);
 
   grunt.registerTask('default', [
