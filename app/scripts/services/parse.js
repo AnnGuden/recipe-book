@@ -2,7 +2,7 @@
 
 angular.module('recipeBookApp')
   .service('ParseService', [function() {
-  var appId = 'Ja3nx6KBGW6mhLR6yWIa54wZDvQcZBvoyp5TCfra';
-  var jsKey = 'ZAcQtzPaxsTJnwxyPS8Kq1HTUmpkxDDYHiddaA28';
+  var appId = '8bqU89YXrJOZ4PlXUvljrrAjgrkasdtjc9VbXoMx';
+  var jsKey = 'KEm74G82Yi0MtsoFuUAw4TVN4KZdnvF5lZOXbLXY';
   Parse.initialize(appId, jsKey);
 }]);

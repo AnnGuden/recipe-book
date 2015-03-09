@@ -15,17 +15,17 @@ angular.module('recipeBookApp')
       'Karma'
     ];
 
-    var TestObject = Parse.Object.extend("TestObject");
+    var Recipes = Parse.Object.extend('Recipes');
 
-    var query = new Parse.Query(TestObject);
-    query.equalTo("myfoo", "bar","arrayCol","objectCol");
+    var query = new Parse.Query(Recipes);
+    //query.equalTo("myfoo", "bar","arrayCol","objectCol");
     query.find({
       success: function(results) {
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
 
           (function($) {
-            $('#results-table').append('<tr><td>' + object.get('myfoo') + '</td><td>' + object.get('score') + '</td><td>' + object.get('arrayCol') + '</td></tr>');
+            $('#results-table').append('<tr><td>' + object.get('name') + '</td><td>' + object.get('type') + '</td><td>' + object.get('description') + '</td></tr>');
           })(jQuery);
         }
       },
