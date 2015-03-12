@@ -92,3 +92,22 @@ body {
   -moz-backface-visibility: hidden;
   -ms-backface-visibility: hidden;
 }
+header {
+  background: #242424;
+  padding: 30px;
+}
+header .logo {
+  margin: 0;
+  padding: 0;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+header .logo a,
+header .logo a:hover {
+  padding-left: 40px;
+  font-family: "montserratregular";
+  font-size: 20px;
+  color: #fefefe;
+  text-decoration: none;
+  background: url("../images/logo.png") 0 50% transparent no-repeat;
+}
