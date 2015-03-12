@@ -1,3 +1,6 @@
+body {
+  min-width: 320px;
+}
 @font-face {
   font-family: 'montserratbold';
   src: url('../fonts/montserrat/Montserrat-Bold-webfont.eot');
@@ -94,7 +97,7 @@ body {
 }
 header {
   background: #242424;
-  padding: 30px;
+  padding: 25px 30px;
 }
 header .logo {
   margin: 0;
