@@ -9,15 +9,10 @@
 
 <div class="row marketing">
 
-  <table id="results-table">
-    <tr>
-      <th>User Name</th>
-      <th>Score</th>
-    </tr>
-  </table>
-
-  <ul>
-    <li ng-repeat="contact in allContacts">{{contact.type}} {{contact.name}}</li>
+  <ul ng-repeat="recipe in allRecipes">
+    <li >{{recipe.type}}</li>
+    <li>{{recipe.name}}</li>
+    <li>{{recipe.description}}</li>
   </ul>
 
 </div>

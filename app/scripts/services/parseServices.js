@@ -1,22 +1,24 @@
 'use strict';
 
 angular.module('recipeBookApp')
-  .service('ParseService', [function() {
-  //var appId = '8bqU89YXrJOZ4PlXUvljrrAjgrkasdtjc9VbXoMx';
-  //var jsKey = 'KEm74G82Yi0MtsoFuUAw4TVN4KZdnvF5lZOXbLXY';
-  //Parse.initialize(appId, jsKey);
-}])
+  .service('ParseSDK', [function() {
+    var appId = '8bqU89YXrJOZ4PlXUvljrrAjgrkasdtjc9VbXoMx';
+    var jsKey = 'KEm74G82Yi0MtsoFuUAw4TVN4KZdnvF5lZOXbLXY';
+    Parse.initialize(appId, jsKey);
+  }])
   .factory('ParseQuery', ['$q', '$rootScope', function ($q, $rootScope){
     return function(query, options){
       var defer = $q.defer();
-//default function call to find
+
+      //default function call to find
       var functionToCall = 'find';
+
       if(options !== undefined && options.functionToCall !== undefined){
         functionToCall = options.functionToCall;
       }
-
       console.log(functionToCall, query);
-//wrap defer resolve/reject in $apply so angular updates watch listeners
+
+      //wrap defer resolve/reject in $apply so angular updates watch listeners
       var defaultParams = [{
         success: function(data){
           $rootScope.$apply(function(){
@@ -30,36 +32,41 @@ angular.module('recipeBookApp')
           });
         }
       }];
-//check for additional parameters to add
+
+      //check for additional parameters to add
       if(options && options.params){
         defaultParams = options.params.concat(defaultParams);
       }
 
       query[functionToCall].apply(query, defaultParams);
+
       return defer.promise;
+
     };
   }])
   .factory('ParseObject', ['ParseQuery', function(ParseQuery){
     return function (parseData, fields){
-//verify parameters
+      //verify parameters
       if(parseData == undefined) throw new Error('Missing parseData');
       if(fields == undefined) throw new Error('Missing fields.');
-//internal parse object reference
+      //internal parse object reference
       var	parseObject = parseData;
       var model;
-//instantiate new parse object from string
+      //instantiate new parse object from string
       if(typeof parseData == 'string')
       {
         var ParseModel = Parse.Object.extend(parseData);
         parseObject = new ParseModel();
       }
-//expose underlying parse obejct through data property
+
+      //expose underlying parse obejct through data property
       Object.defineProperty(this, 'data', { get : function(){ return parseObject; } });
-//add dynamic properties from fields array
+
+      //add dynamic properties from fields array
       var self = this;
       for(var i=0; i<fields.length; i++)
       {
-//add closure
+      //add closure
         (function() {
           var propName = fields[i];
           Object.defineProperty(self, propName, {
@@ -68,7 +75,8 @@ angular.module('recipeBookApp')
           });
         })();
       }
-//instance methods
+
+      //instance methods
       this.save = function(){
         return ParseQuery(parseObject, {functionToCall:'save', params:[null]})
       }
@@ -80,5 +88,4 @@ angular.module('recipeBookApp')
       }
     };
   }])
-
 ;
