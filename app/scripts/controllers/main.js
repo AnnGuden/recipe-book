@@ -20,7 +20,7 @@ angular.module('recipeBookApp')
     })
 
   }])
-  .controller('RecipeCtrl', ['$scope', 'Recipes', '$routeParams', function ($scope, Recipes,$routeParams) {
+  .controller('RecipeCtrl', ['$scope', 'Recipes', '$routeParams', function ($scope, Recipes, $routeParams) {
 
       Recipes.get($routeParams.recipeId).success(function (data) {
         $scope.recipe = data;
