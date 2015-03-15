@@ -10,7 +10,8 @@
 <div class="row marketing">
 
   <ul ng-repeat="recipe in recipes">
-    <li >{{recipe.type}}</li>
+    <li >{{recipe.type}}
+      <a href="#/recipe/{{recipe.objectId}}" >go</a></li>
     <li>{{recipe.name}}</li>
     <li>{{recipe.description}}</li>
   </ul>

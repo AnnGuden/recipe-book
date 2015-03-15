@@ -15,7 +15,7 @@ angular.module('recipeBookApp')
         return $http.get('https://api.parse.com/1/classes/Recipes/'+id,{
           headers:{
             'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
-            'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+            'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY
           }
         });
       },
