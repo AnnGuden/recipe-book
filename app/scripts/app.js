@@ -31,7 +31,4 @@ angular
         redirectTo: '/'
       });
   })
-  .run(['ParseSDK', function(ParseSDK){
-    //parse instantiated throught service injection
-  }])
 ;

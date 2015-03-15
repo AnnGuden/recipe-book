@@ -1,91 +1,55 @@
 'use strict';
 
 angular.module('recipeBookApp')
-  .service('ParseSDK', [function() {
-    var appId = '8bqU89YXrJOZ4PlXUvljrrAjgrkasdtjc9VbXoMx';
-    var jsKey = 'KEm74G82Yi0MtsoFuUAw4TVN4KZdnvF5lZOXbLXY';
-    Parse.initialize(appId, jsKey);
+  .factory('Recipes',['$http','PARSE_CREDENTIALS',function($http,PARSE_CREDENTIALS){
+    return {
+      getAll:function(){
+        return $http.get('https://api.parse.com/1/classes/Recipes',{
+          headers:{
+            'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+            'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+          }
+        });
+      },
+      get:function(id){
+        return $http.get('https://api.parse.com/1/classes/Recipes/'+id,{
+          headers:{
+            'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+            'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+          }
+        });
+      },
+      create:function(data){
+        return $http.post('https://api.parse.com/1/classes/Recipes',data,{
+          headers:{
+            'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+            'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+            'Content-Type':'application/json'
+          }
+        });
+      },
+      edit:function(id,data){
+        return $http.put('https://api.parse.com/1/classes/Recipes/'+id,data,{
+          headers:{
+            'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+            'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+            'Content-Type':'application/json'
+          }
+        });
+      },
+      delete:function(id){
+        return $http.delete('https://api.parse.com/1/classes/Recipes/'+id,{
+          headers:{
+            'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+            'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+            'Content-Type':'application/json'
+          }
+        });
+      }
+    }
   }])
-  .factory('ParseQuery', ['$q', '$rootScope', function ($q, $rootScope){
-    return function(query, options){
-      var defer = $q.defer();
-
-      //default function call to find
-      var functionToCall = 'find';
-
-      if(options !== undefined && options.functionToCall !== undefined){
-        functionToCall = options.functionToCall;
-      }
-      console.log(functionToCall, query);
-
-      //wrap defer resolve/reject in $apply so angular updates watch listeners
-      var defaultParams = [{
-        success: function(data){
-          $rootScope.$apply(function(){
-            defer.resolve(data);
-          });
-        },
-        error: function(data, error){
-          console.log('error:', error);
-          $rootScope.$apply(function(){
-            defer.reject(error);
-          });
-        }
-      }];
-
-      //check for additional parameters to add
-      if(options && options.params){
-        defaultParams = options.params.concat(defaultParams);
-      }
-
-      query[functionToCall].apply(query, defaultParams);
-
-      return defer.promise;
-
-    };
-  }])
-  .factory('ParseObject', ['ParseQuery', function(ParseQuery){
-    return function (parseData, fields){
-      //verify parameters
-      if(parseData == undefined) throw new Error('Missing parseData');
-      if(fields == undefined) throw new Error('Missing fields.');
-      //internal parse object reference
-      var	parseObject = parseData;
-      var model;
-      //instantiate new parse object from string
-      if(typeof parseData == 'string')
-      {
-        var ParseModel = Parse.Object.extend(parseData);
-        parseObject = new ParseModel();
-      }
-
-      //expose underlying parse obejct through data property
-      Object.defineProperty(this, 'data', { get : function(){ return parseObject; } });
-
-      //add dynamic properties from fields array
-      var self = this;
-      for(var i=0; i<fields.length; i++)
-      {
-      //add closure
-        (function() {
-          var propName = fields[i];
-          Object.defineProperty(self, propName, {
-            get : function(){ return parseObject.get(propName); },
-            set : function(value){ parseObject.set(propName, value); }
-          });
-        })();
-      }
-
-      //instance methods
-      this.save = function(){
-        return ParseQuery(parseObject, {functionToCall:'save', params:[null]})
-      }
-      this.delete = function(){
-        return ParseQuery(parseObject, {functionToCall:'destroy'});
-      }
-      this.fetch = function(){
-        return ParseQuery(parseObject, {functionToCall:'fetch'});
-      }
-    };
-  }])
+  .value('PARSE_CREDENTIALS',{
+    APP_ID: '8bqU89YXrJOZ4PlXUvljrrAjgrkasdtjc9VbXoMx',
+    REST_API_KEY:'Cija6IJqPisV341IDEKHmhoX3M81cAArvEO40yRx'
+  })
 ;
