@@ -25,7 +25,6 @@ angular.module('recipeBookApp')
     //$scope.numberUserLikes='';
     //$scope.clientIp = '';
 
-
     Recipes.get($routeParams.recipeId).success(function (data) {
       $scope.recipe = data;
       $scope.numberUserLikes = data.userLikes.length;

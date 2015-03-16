@@ -46,7 +46,7 @@ angular.module('recipeBookApp')
           }
         });
       }
-    }
+    };
   }])
   .value('PARSE_CREDENTIALS',{
     APP_ID: '8bqU89YXrJOZ4PlXUvljrrAjgrkasdtjc9VbXoMx',
