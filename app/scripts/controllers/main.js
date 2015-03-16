@@ -21,7 +21,8 @@ angular.module('recipeBookApp')
       'drink',
       'dessert',
       'pizza',
-      'soup'
+      'soup',
+      'side'
     ];
 
     Recipes.getAll().success(function(data){
@@ -53,5 +54,10 @@ angular.module('recipeBookApp')
     };
 
     //["10.252.227.60","87.252.225.62"]
+
+    $scope.demo1 = {
+      min: 20,
+      max: 80
+    };
 
   }]);
