@@ -15,6 +15,15 @@ angular.module('recipeBookApp')
       'Karma'
     ];
 
+    $scope.types = [
+      'main',
+      'salad',
+      'drink',
+      'dessert',
+      'pizza',
+      'soup'
+    ];
+
     Recipes.getAll().success(function(data){
       $scope.recipes = data.results;
     });

@@ -8,8 +8,12 @@
 </div>
 
 <div class="row marketing">
-
-  <ul ng-repeat="recipe in recipes">
+  <select ng-model="search.type">
+    <option value="">All types</option>
+    <option ng-repeat="type in types" value="{{type}}">{{type}}</option>
+  </select>
+  ingredient only <input ng-model="search.ingredientsArr.ingredient">
+  <ul ng-repeat="recipe in recipes | filter:search">
     <li >{{recipe.type}}
       <a href="#/recipe/{{recipe.objectId}}" >go</a></li>
     <li>{{recipe.name}}</li>
