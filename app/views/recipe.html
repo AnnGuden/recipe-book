@@ -4,3 +4,13 @@
   {{recipe.description}} <br/>gogo <br/>
   <img src="{{recipe.image.url}}" alt=""/>
 </div>
+
+<div>
+  {{clientIp}} <br/>
+  <!--{{recipe.userLikes.length}}-->
+
+  {{numberUserLikes}} <br/>
+  <input ng-model="recipe.test" type="text"/>
+  {{recipe.test}}
+  <a href="" ng-click="addUserLike()">+</a>
+</div>
