@@ -48,7 +48,9 @@ angular.module('recipeBookApp')
 
     Recipes.get($routeParams.recipeId).success(function (data) {
       $scope.recipe = data;
-      $scope.numberUserLikes = data.userLikes.length;
+      //$scope.numberUserLikes = data.userLikes.length;
+      //$scope.created_at_date = ($scope.recipe.createdAt.getUTCMonth()+1) + "/" + $scope.recipe.createdAt.getUTCDate() + "/" + $scope.recipe.createdAt.getUTCFullYear();
+      console.log($scope.recipe.createdAt)
     });
 
     JsonIp.success(function(data) {
