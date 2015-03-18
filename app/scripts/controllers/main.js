@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name testApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the testApp
- */
 angular.module('recipeBookApp')
   .controller('MainCtrl', ['$scope', 'Recipes', function ($scope, Recipes, JsonIp) {
 
@@ -34,6 +27,19 @@ angular.module('recipeBookApp')
 
     });
 
+    $scope.sliderConfig = {
+      min: 0,
+      max: 200,
+      userMin: 0,
+      userMax: 300
+    };
+
+    //$scope.cookingTime = $scope.demo1.max - $scope.demo1.min;
+
+
+    //
+    //console.log($scope.searchTime);
+
   }])
   .controller('RecipeCtrl', ['$scope', 'Recipes', 'JsonIp', '$routeParams', function ($scope, Recipes, JsonIp, $routeParams) {
 
@@ -60,9 +66,5 @@ angular.module('recipeBookApp')
 
     //["10.252.227.60","87.252.225.62"]
 
-    $scope.demo1 = {
-      min: 20,
-      max: 80
-    };
 
   }]);

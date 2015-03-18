@@ -4,7 +4,19 @@
     <option ng-repeat="type in types" value="{{type}}">{{type}}</option>
   </select>
   ingredient only <input ng-model="search.ingredients">
-  <ul ng-repeat="recipe in recipes | filter:search">
+
+  <div range-slider min="sliderConfig.min" max="sliderConfig.max" model-min="sliderConfig.userMin" model-max="sliderConfig.userMax" attach-handle-values="true" show-values="true"></div>
+
+  <p>And here are the values in our model being updated: <br/>
+    <strong>Min</strong>
+    <input type="text" class="input-small ng-pristine ng-valid" ng-model="sliderConfig.userMin">
+    <strong>Max</strong>
+    <input type="text" class="input-small ng-pristine ng-valid" ng-model="sliderConfig.userMax">
+  </p>
+
+  {{cookingTime}}
+
+  <ul ng-repeat="recipe in recipes | filter:search | rangeFilter:sliderConfig">
     <li >{{recipe.type}}
       <a href="#/recipe/{{recipe.objectId}}" >go</a></li>
     <li>{{recipe.name}}</li>
