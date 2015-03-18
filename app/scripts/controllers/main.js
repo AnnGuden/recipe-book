@@ -34,11 +34,11 @@ angular.module('recipeBookApp')
       userMax: 300
     };
 
-    //$scope.cookingTime = $scope.demo1.max - $scope.demo1.min;
-
-
-    //
-    //console.log($scope.searchTime);
+    $scope.sortProperties = [
+      {value:'name', text: 'Name (A-Z)'},
+      {value:'-name', text: 'Name (Z-A)'},
+      {value:'createdAt', text: 'Created date'}
+    ]
 
   }])
   .controller('RecipeCtrl', ['$scope', 'Recipes', 'JsonIp', '$routeParams', function ($scope, Recipes, JsonIp, $routeParams) {

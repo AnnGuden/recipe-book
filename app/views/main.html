@@ -14,9 +14,13 @@
     <input type="text" class="input-small ng-pristine ng-valid" ng-model="sliderConfig.userMax">
   </p>
 
-  {{cookingTime}}
+  Sort by:
+  <select ng-model="orderProperty">
+    <option value="">No sorting</option>
+    <option ng-repeat="prop in sortProperties" value="{{prop.value}}">{{prop.text}}</option>
+  </select>
 
-  <ul ng-repeat="recipe in recipes | filter:search | rangeFilter:sliderConfig">
+  <ul ng-repeat="recipe in recipes | filter:search | rangeFilter:sliderConfig | orderBy:orderProperty">
     <li >{{recipe.type}}
       <a href="#/recipe/{{recipe.objectId}}" >go</a></li>
     <li>{{recipe.name}}</li>
