@@ -1,18 +1,9 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
 <div class="row marketing">
   <select ng-model="search.type">
-    <option value="">All types</option>
+    <option value="">All</option>
     <option ng-repeat="type in types" value="{{type}}">{{type}}</option>
   </select>
-  ingredient only <input ng-model="search.ingredientsArr.ingredient">
+  ingredient only <input ng-model="search.ingredients">
   <ul ng-repeat="recipe in recipes | filter:search">
     <li >{{recipe.type}}
       <a href="#/recipe/{{recipe.objectId}}" >go</a></li>

@@ -9,24 +9,29 @@
  */
 angular.module('recipeBookApp')
   .controller('MainCtrl', ['$scope', 'Recipes', function ($scope, Recipes, JsonIp) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
 
-    $scope.types = [
-      'main',
-      'salad',
-      'drink',
-      'dessert',
-      'pizza',
-      'soup',
-      'side'
-    ];
+    //$scope.types = [
+    //  'main',
+    //  'salad',
+    //  'drink',
+    //  'dessert',
+    //  'pizza',
+    //  'soup',
+    //  'side'
+    //];
 
+    //TO DO: refactor
     Recipes.getAll().success(function(data){
       $scope.recipes = data.results;
+
+      $scope.types = [];
+
+      for(var i = 0; i < $scope.recipes.length; i++) {
+        if ($scope.types.indexOf($scope.recipes[i].type) == -1) {
+          $scope.types.push($scope.recipes[i].type);
+        }
+      }
+
     });
 
   }])
