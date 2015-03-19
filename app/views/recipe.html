@@ -4,10 +4,14 @@
   {{recipe.description}} <br/>
   <img src="{{recipe.image.url}}" alt=""/> <br/>
   {{recipe.instructions}} <br/>
-  {{recipe.ingredients}} <br/>
+  <!--{{recipe.ingredients}} <br/>-->
   {{recipe.cookingTime}} <br/>
   {{recipe.createdAt}} <br/>
   {{cookingTimeHours}} {{cookingTimeMinutes}}
+
+  <ul>
+    <li ng-repeat="ingr in recipe.ingredients">{{ingr}}</li>
+  </ul>
 </div>
 
 <div>

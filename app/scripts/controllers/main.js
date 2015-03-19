@@ -55,10 +55,10 @@ angular.module('recipeBookApp')
       //TO DO: refactor
       var time = $scope.convertMinutes($scope.recipe.cookingTime);
       if (time.h > 0) {
-        $scope.cookingTimeHours = time.h + ' h';
+        $scope.cookingTimeHours = time.h + ' hr';
       } else $scope.cookingTimeHours = '';
-      if (time.m >= 0) {
-        $scope.cookingTimeMinutes = time.m + ' min';
+      if (time.m > 0) {
+        $scope.cookingTimeMinutes = time.m + ' mins';
       } else $scope.cookingTimeMinutes = '';
 
     });
