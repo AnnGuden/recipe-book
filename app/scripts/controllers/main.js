@@ -50,7 +50,17 @@ angular.module('recipeBookApp')
       $scope.recipe = data;
       //$scope.numberUserLikes = data.userLikes.length;
       //$scope.created_at_date = ($scope.recipe.createdAt.getUTCMonth()+1) + "/" + $scope.recipe.createdAt.getUTCDate() + "/" + $scope.recipe.createdAt.getUTCFullYear();
-      console.log($scope.recipe.createdAt)
+      //console.log($scope.recipe.createdAt)
+
+      //TO DO: refactor
+      var time = $scope.convertMinutes($scope.recipe.cookingTime);
+      if (time.h > 0) {
+        $scope.cookingTimeHours = time.h + ' h';
+      } else $scope.cookingTimeHours = '';
+      if (time.m >= 0) {
+        $scope.cookingTimeMinutes = time.m + ' min';
+      } else $scope.cookingTimeMinutes = '';
+
     });
 
     JsonIp.success(function(data) {
@@ -67,6 +77,20 @@ angular.module('recipeBookApp')
     };
 
     //["10.252.227.60","87.252.225.62"]
+
+    $scope.convertMinutes = function minutesToHours(mins)
+    {
+      var hours = Math.floor(mins / 60);
+
+      var divisor_for_minutes = mins % 60;
+      var minutes = Math.ceil(divisor_for_minutes);
+
+      var obj = {
+        "h": hours,
+        "m": minutes
+      };
+      return obj;
+    };
 
 
   }]);
