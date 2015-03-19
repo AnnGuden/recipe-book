@@ -37,7 +37,7 @@ angular.module('recipeBookApp')
     $scope.sortProperties = [
       {value:'name', text: 'Name (A-Z)'},
       {value:'-name', text: 'Name (Z-A)'},
-      {value:'createdAt', text: 'Created date'}
+      {value:'createdAt', text: 'Date created '}
     ]
 
   }])

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('recipeBookApp')
   .filter('rangeFilter', function() {
     return function( items, rangeInfo ) {
