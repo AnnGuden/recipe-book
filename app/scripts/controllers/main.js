@@ -27,7 +27,41 @@ angular.module('recipeBookApp')
         }
       }
 
+
+      //$scope.pageChanged = function() {
+      //  $log.log('Page changed to: ' + $scope.currentPage);
+      //};
+      //
+      //$scope.maxSize = 5;
+      //$scope.bigTotalItems = 175;
+      //$scope.bigCurrentPage = 1;
+
+
+
+
+      $scope.totalItems = $scope.recipes.length;
+      $scope.currentPage = 1;
+      $scope.itemsPerPage = 5;
+
+      $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+      };
+
+      $scope.pageCount = function () {
+        return Math.ceil($scope.recipes.length / $scope.itemsPerPage);
+      };
+
+      $scope.$watch('currentPage + itemsPerPage', function() {
+        var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
+          end = begin + $scope.itemsPerPage;
+
+        $scope.filteredRecipes = $scope.recipes.slice(begin, end);
+      });
+
+
     });
+
+
 
   }])
   .controller('RecipeCtrl', ['$scope', 'Recipes', 'JsonIp', '$routeParams', 'ManageData', function ($scope, Recipes, JsonIp, $routeParams, ManageData) {

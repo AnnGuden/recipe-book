@@ -20,11 +20,21 @@
     <option ng-repeat="prop in sortProperties" value="{{prop.value}}">{{prop.text}}</option>
   </select>
 
-  <ul ng-repeat="recipe in recipes | filter:search | rangeFilter:sliderConfig | orderBy:orderProperty">
+  <!--Items per page:-->
+  <!--<select ng-model="itemsPerPage">-->
+    <!--<option value="5">5</option>-->
+    <!--<option value="10">10</option>-->
+    <!--<option value="15">15</option>-->
+    <!--<option value="20">20</option>-->
+  <!--</select>-->
+
+  <ul ng-repeat="recipe in filteredRecipes | filter:search | rangeFilter:sliderConfig | orderBy:orderProperty">
     <li >{{recipe.type}}
       <a href="#/recipe/{{recipe.objectId}}" >go</a></li>
     <li>{{recipe.name}}</li>
     <li>{{recipe.description}}</li>
   </ul>
+
+  <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 
 </div>
