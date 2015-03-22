@@ -73,7 +73,21 @@ angular.module('recipeBookApp')
 
 
     $scope.addUserLike = function () {
-      Recipes.edit($scope.recipe.objectId, {test: $scope.iparr});
+      //Recipes.edit($scope.recipe.objectId, {test: $scope.iparr});
+      if(typeof $scope.recipe.test ==='undefined'){
+        $scope.recipe.test = [];
+      }
+      var index = $scope.recipe.test.indexOf($scope.clientIp);
+        if (index == -1) {
+          $scope.recipe.test.push($scope.clientIp);
+
+        }
+        else{
+          $scope.recipe.test.splice(index,1);
+        }
+
+      Recipes.edit($routeParams.recipeId, $scope.recipe);
+
     };
 
     //["10.252.227.60","87.252.225.62"]
