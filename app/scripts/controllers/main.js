@@ -27,36 +27,36 @@ angular.module('recipeBookApp')
         }
       }
 
-
-      //$scope.pageChanged = function() {
-      //  $log.log('Page changed to: ' + $scope.currentPage);
-      //};
-      //
-      //$scope.maxSize = 5;
-      //$scope.bigTotalItems = 175;
-      //$scope.bigCurrentPage = 1;
-
-
-
-
       $scope.totalItems = $scope.recipes.length;
       $scope.currentPage = 1;
       $scope.itemsPerPage = 5;
 
-      $scope.setPage = function (pageNo) {
-        $scope.currentPage = pageNo;
-      };
+      //$scope.setPage = function (pageNo) {
+      //  $scope.currentPage = pageNo;
+      //};
+      //
+      //$scope.pageCount = function () {
+      //  return Math.ceil($scope.recipes.length / $scope.itemsPerPage);
+      //};
 
-      $scope.pageCount = function () {
-        return Math.ceil($scope.recipes.length / $scope.itemsPerPage);
-      };
+      //$scope.$watch('currentPage + itemsPerPage', function() {
+      //  var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
+      //    end = begin + $scope.itemsPerPage;
+      //
+      //  $scope.filteredRecipes = $scope.recipes.slice(begin, end);
+      //});
 
-      $scope.$watch('currentPage + itemsPerPage', function() {
-        var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
-          end = begin + $scope.itemsPerPage;
-
+      $scope.recipesToDisplay = function() {
+        var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+        var end = begin + $scope.itemsPerPage;
         $scope.filteredRecipes = $scope.recipes.slice(begin, end);
-      });
+      };
+
+      $scope.recipesToDisplay();
+
+      $scope.pageChanged = function() {
+        $scope.recipesToDisplay();
+      };
 
 
     });
