@@ -1,6 +1,11 @@
 body {
   min-width: 320px;
 }
+@media (min-width: 1200px) {
+  .container {
+    width: 970px;
+  }
+}
 @font-face {
   font-family: 'montserratbold';
   src: url('../fonts/montserrat/Montserrat-Bold-webfont.eot');
@@ -94,6 +99,16 @@ body {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -ms-backface-visibility: hidden;
+}
+h1 {
+  font-family: "montserratbold";
+  font-size: 50px;
+  color: #313131;
+}
+h2 {
+  font-family: "open_sanssemibold";
+  font-size: 20px;
+  color: #404040;
 }
 header {
   background: #242424;

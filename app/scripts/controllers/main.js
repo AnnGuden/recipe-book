@@ -68,13 +68,10 @@ angular.module('recipeBookApp')
 
     Recipes.get($routeParams.recipeId).success(function (data) {
       $scope.recipe = data;
-      //$scope.numberUserLikes = data.userLikes.length;
-      //$scope.created_at_date = ($scope.recipe.createdAt.getUTCMonth()+1) + "/" + $scope.recipe.createdAt.getUTCDate() + "/" + $scope.recipe.createdAt.getUTCFullYear();
-      //console.log($scope.recipe.createdAt)
 
-      var time = ManageData.minutesToHoursAndMinutes($scope.recipe.cookingTime);
-      $scope.cookingTimeHours = time.hours > 0 ? time.hours + ' hr' : '';
-      $scope.cookingTimeMinutes = time.minutes > 0 ? time.minutes + ' mins' : '';
+      $scope.time = ManageData.minutesToHoursAndMinutes($scope.recipe.cookingTime);
+      //$scope.cookingTimeHours = time.hours > 0 ? time.hours + ' hr' : '';
+      //$scope.cookingTimeMinutes = time.minutes > 0 ? time.minutes + ' mins' : '';
 
     });
 
@@ -84,17 +81,17 @@ angular.module('recipeBookApp')
 
     $scope.addUserLike = function () {
 
-      if(typeof $scope.recipe.test ==='undefined'){
-        $scope.recipe.test = [];
+      if(typeof $scope.recipe.userLikes ==='undefined'){
+        $scope.recipe.userLikes = [];
       }
 
-      var index = $scope.recipe.test.indexOf($scope.clientIp);
+      var index = $scope.recipe.userLikes.indexOf($scope.clientIp);
 
       if (index == -1) {
-        $scope.recipe.test.push($scope.clientIp);
+        $scope.recipe.userLikes.push($scope.clientIp);
       }
       else{
-        $scope.recipe.test.splice(index,1);
+        $scope.recipe.userLikes.splice(index,1);
       }
 
       Recipes.edit($routeParams.recipeId, $scope.recipe);

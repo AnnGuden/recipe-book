@@ -1,13 +1,19 @@
-<div>
-  {{recipe.type}} <br/>
-  {{recipe.name}}<br/>
-  {{recipe.description}} <br/>
+<div class="row">
+  <div class="col-xs-12">
+
+  </div>
+
+  <h1>{{recipe.name}}</h1>
+  <h2>{{recipe.description}}</h2>
+
   <img src="{{recipe.image.url}}" alt=""/> <br/>
   {{recipe.instructions}} <br/>
   <!--{{recipe.ingredients}} <br/>-->
   {{recipe.cookingTime}} <br/>
   {{recipe.createdAt}} <br/>
-  {{cookingTimeHours}} {{cookingTimeMinutes}}
+  <span ng-if="time.hours > 0">{{time.hours}} hr</span>
+  <span ng-if="time.minutes > 0">{{time.minutes}} min</span>
+   {{cookingTimeMinutes}}
 
   <ul>
     <li ng-repeat="ingr in recipe.ingredients">{{ingr}}</li>
@@ -15,11 +21,7 @@
 </div>
 
 <div>
-  {{clientIp}} <br/>
-  <!--{{recipe.userLikes.length}}-->
 
-  {{numberUserLikes}} <br/>
-  <input ng-model="recipe.test" type="text"/>
-  {{recipe.test}}
+  {{recipe.userLikes.length}}
   <a href="" ng-click="addUserLike()">+</a>
 </div>
