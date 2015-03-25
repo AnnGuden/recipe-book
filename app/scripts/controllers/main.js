@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('recipeBookApp')
-  .controller('MainCtrl', ['$scope', 'Recipes', 'filterFilter', function ($scope, Recipes, filterFilter) {
+  .controller('MainCtrl', ['$scope', 'Recipes', 'filterFilter', '$filter', function ($scope, Recipes, filterFilter, $filter) {
 
     $scope.sliderConfig = {
       min: 0,
@@ -75,25 +75,30 @@ angular.module('recipeBookApp')
       // $watch search to update pagination
       $scope.$watchCollection('search', function (newVal, oldVal) {
 
-        console.log($scope.recipes)
-        console.log(newVal)
+
+        //console.log(newVal)
 
 
         $scope.filtered = filterFilter($scope.recipes, newVal);
+        //console.log($scope.filtered)
         $scope.totalItems = $scope.filtered.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
         $scope.currentPage = 1;
+
+        console.log($scope.filtered)
       });
 
 
         $scope.$watchCollection('sliderConfig', function (newVal, oldVal) {
-          newVal.cookingTime = newVal.userMax;
 
-          var val = {};
-          val.cookingTime = newVal.userMax;
 
-            console.log(val)
-          $scope.filtered = filterFilter($scope.recipes, val);
+        //  newVal.cookingTime = newVal.userMax;
+        //
+        //  var val = {};
+        //  val.cookingTime = newVal.userMax;
+        //
+        //
+          $scope.filtered = $filter('rangeFilter')($scope.recipes, newVal);
         $scope.totalItems = $scope.filtered.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
         $scope.currentPage = 1;
