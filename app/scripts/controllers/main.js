@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('recipeBookApp')
-  .controller('MainCtrl', ['$scope', 'Recipes', function ($scope, Recipes) {
+  .controller('MainCtrl', ['$scope', 'Recipes', 'filterFilter', function ($scope, Recipes, filterFilter) {
 
     $scope.sliderConfig = {
       min: 0,
@@ -17,6 +17,7 @@ angular.module('recipeBookApp')
     ];
 
     Recipes.getAll().success(function(data){
+
       $scope.recipes = data.results;
 
       $scope.types = [];
@@ -27,9 +28,9 @@ angular.module('recipeBookApp')
         }
       }
 
-      $scope.totalItems = $scope.recipes.length;
-      $scope.currentPage = 1;
-      $scope.itemsPerPage = 5;
+      //$scope.totalItems = $scope.recipes.length;
+      //$scope.currentPage = 1;
+      //$scope.itemsPerPage = 5;
 
       //$scope.setPage = function (pageNo) {
       //  $scope.currentPage = pageNo;
@@ -46,17 +47,61 @@ angular.module('recipeBookApp')
       //  $scope.filteredRecipes = $scope.recipes.slice(begin, end);
       //});
 
-      $scope.recipesToDisplay = function() {
-        var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
-        var end = begin + $scope.itemsPerPage;
-        $scope.filteredRecipes = $scope.recipes.slice(begin, end);
+      //$scope.recipesToDisplay = function() {
+      //  var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+      //  var end = begin + $scope.itemsPerPage;
+      //  $scope.filteredRecipes = $scope.recipes.slice(begin, end);
+      //};
+      //
+      //$scope.recipesToDisplay();
+      //
+      //$scope.pageChanged = function() {
+      //  $scope.recipesToDisplay();
+      //};
+
+      $scope.search = {};
+
+      $scope.resetFilters = function () {
+        // needs to be a function or it won't trigger a $watch
+        $scope.search = {};
       };
 
-      $scope.recipesToDisplay();
+      // pagination controls
+      $scope.currentPage = 1;
+      $scope.totalItems = $scope.recipes.length;
+      $scope.entryLimit = 8; // items per page
+      $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
 
-      $scope.pageChanged = function() {
-        $scope.recipesToDisplay();
-      };
+      // $watch search to update pagination
+      $scope.$watchCollection('search', function (newVal, oldVal) {
+
+        console.log($scope.recipes)
+        console.log(newVal)
+
+
+        $scope.filtered = filterFilter($scope.recipes, newVal);
+        $scope.totalItems = $scope.filtered.length;
+        $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+        $scope.currentPage = 1;
+      });
+
+
+        $scope.$watchCollection('sliderConfig', function (newVal, oldVal) {
+          newVal.cookingTime = newVal.userMax;
+
+          var val = {};
+          val.cookingTime = newVal.userMax;
+
+            console.log(val)
+          $scope.filtered = filterFilter($scope.recipes, val);
+        $scope.totalItems = $scope.filtered.length;
+        $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+        $scope.currentPage = 1;
+
+          console.log($scope.filtered)
+
+      });
+
 
 
     });
