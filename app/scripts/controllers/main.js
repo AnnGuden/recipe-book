@@ -64,6 +64,12 @@ angular.module('recipeBookApp')
       $scope.resetFilters = function () {
         // needs to be a function or it won't trigger a $watch
         $scope.search = {};
+        $scope.sliderConfig = {
+          min: 0,
+          max: 200,
+          userMin: 0,
+          userMax: 300
+        };
       };
 
       // pagination controls
