@@ -138,3 +138,20 @@ header .logo a:hover {
   text-decoration: none;
   background: url("../images/logo.png") 0 50% transparent no-repeat;
 }
+.ngrs-range-slider {
+  border: none;
+  box-shadow: none;
+  padding: 4px 0;
+}
+.ngrs-range-slider:after {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: 0;
+  height: 8px;
+  width: 100%;
+  background: #e4e4e4;
+}
+.ngrs-range-slider.ngrs-focus {
+  box-shadow: none;
+}
