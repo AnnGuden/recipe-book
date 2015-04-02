@@ -71,13 +71,13 @@
 <!--<ul>-->
   <!--<li ng-repeat="item in filtered = recipes | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">{{item.name}}</li>-->
 <!--</ul>-->
-
-<ul ng-repeat="recipe in filtered = recipes | filter:search | rangeFilter: sliderConfig | orderBy:orderProperty | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
-<li >{{recipe.type}}
-<a href="#/recipe/{{recipe.objectId}}" >go</a></li>
-<li>{{recipe.name}}</li>
-  <li>{{ recipe.cookingTime}}</li>
+<ul>
+<li ng-repeat="recipe in filteredSlider = recipes | filter:search | rangeFilter: sliderConfig | orderBy:orderProperty | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+{{recipe.type}}
+<a href="#/recipe/{{recipe.objectId}}" >go</a>
+{{recipe.name}}
+  {{ recipe.cookingTime}}
 <!--<li>{{recipe.description}}</li>-->
+</li>
 </ul>
-
 <pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>
