@@ -75,8 +75,8 @@ angular.module('recipeBookApp')
       // pagination controls
       $scope.currentPage = 1;
       $scope.totalItems = $scope.recipes.length;
-      $scope.entryLimit = 8; // items per page
-      $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+      $scope.itemsPerPage =6; // items per page
+      $scope.noOfPages = Math.ceil($scope.totalItems / $scope.itemsPerPage);
 
       // $watch search to update pagination
       $scope.$watchCollection('search', function (newVal, oldVal) {
@@ -88,28 +88,23 @@ angular.module('recipeBookApp')
         $scope.filtered = filterFilter($scope.recipes, newVal);
         //console.log($scope.filtered)
         $scope.totalItems = $scope.filtered.length;
-        $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+        $scope.noOfPages = Math.ceil($scope.totalItems / $scope.itemsPerPage);
         $scope.currentPage = 1;
 
 
 
         $scope.$watchCollection('sliderConfig', function (newValSlider, oldVal) {
 
-
-          //  newVal.cookingTime = newVal.userMax;
-          //
-          //  var val = {};
-          //  val.cookingTime = newVal.userMax;
-          //
-          //
           $scope.filteredSlider = $filter('rangeFilter')($scope.filtered, newValSlider);
           $scope.totalItems = $scope.filteredSlider.length;
-          $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+          $scope.noOfPages = Math.ceil($scope.totalItems / $scope.itemsPerPage);
           $scope.currentPage = 1;
 
 
 
         });
+
+
 
       });
 

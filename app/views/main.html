@@ -39,7 +39,6 @@
 
 
 
-
   total items: {{totalItems}}
   pages:{{noOfPages}}
 
@@ -52,12 +51,12 @@
         | filter:search
         | rangeFilter: sliderConfig
         | orderBy:orderProperty
-        | startFrom:(currentPage-1)*entryLimit
-        | limitTo:entryLimit">
+        | startFrom:(currentPage-1)*itemsPerPage
+        | limitTo:itemsPerPage">
         <a href="#/recipe/{{recipe.objectId}}">
-          <span>
-            <img src="{{recipe.image.url}}" alt=""/>
-          </span>
+          <!--<span>-->
+            <!--<img src="{{recipe.image.url}}" alt=""/>-->
+          <!--</span>-->
           <span>
             <span>Ready in: {{recipe.cookingTime}} min</span>
             <span>Likes: {{recipe.userLikes.length}}</span>
@@ -70,4 +69,4 @@
   </div>
 </div>
 
-<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>
+<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="itemsPerPage"></pagination>
